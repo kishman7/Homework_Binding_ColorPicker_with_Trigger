@@ -1,0 +1,150 @@
+﻿<Window x:Class="Classwork_Homework_Binding_ColorPicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Classwork_Homework_Binding_ColorPicker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Slider">
+            <Style.Triggers>
+                <!--DataTrigger Binding="{Binding ElementName=checkBox1, Path=IsChecked}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </-->
+                <!--DataTrigger Binding="{Binding ElementName=checkBox2, Path=IsChecked}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Value" Value="100"/>
+                </-->
+                <!--DataTrigger Binding="{Binding ElementName=checkBox3, Path=IsChecked}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Value" Value="100"/>
+                </-->
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="286*"/>
+        </Grid.RowDefinitions>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="115*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="423*"/>
+                <ColumnDefinition Width="184*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Red" Margin="5"
+                   FontSize="12" 
+                   HorizontalContentAlignment="Center">
+            </Label>
+            <Label Grid.Row="1" Content="Green" Margin="5"
+                   FontSize="11" 
+                   HorizontalContentAlignment="Center">
+            </Label>
+            <Label Grid.Row="2" Content="Blue" Margin="5"
+                   FontSize="12" 
+                   HorizontalContentAlignment="Center">
+            </Label>
+            <Button Grid.Row="3" Grid.ColumnSpan="4" Margin="5"
+                    Content="Add" FontSize="16" VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center" Width="150"
+                    Click="Button_Click">
+            </Button>
+            <Slider Grid.Column="2"  Maximum="255"
+                    x:Name="slider1" VerticalAlignment="Center"
+                    Value="{Binding Red}"
+                    >
+                <Slider.Resources>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=checkBox1, Path=IsChecked}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Slider Grid.Column="2" Grid.Row="1" Maximum="255"
+                    x:Name="slider2" VerticalAlignment="Center" 
+                    Value="{Binding Green}"
+                    >
+                <Slider.Resources>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=checkBox2, Path=IsChecked}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Slider Grid.Column="2" Grid.Row="2" Maximum="255"
+                    x:Name="slider3" VerticalAlignment="Center"
+                    Value="{Binding Blue}"
+                    >
+                <Slider.Resources>
+                    <Style TargetType="Slider">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=checkBox3, Path=IsChecked}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Slider.Resources>
+            </Slider>
+            <Border Grid.Column="3"
+                   Grid.RowSpan="4" Margin="10" BorderBrush="Black"
+                    BorderThickness="1">
+                <Label x:Name="lblColor" 
+                       Background="{Binding Brush}">
+                </Label>
+            </Border>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      x:Name="checkBox1" Click="checkBox1_Click"/>
+            <CheckBox Grid.Column="1" Grid.Row="1" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Bottom"
+                      x:Name="checkBox2" Click="checkBox2_Click" 
+                      Margin="27,0,27,9"/>
+            <CheckBox Grid.Column="1" Grid.Row="2" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      x:Name="checkBox3" Click="checkBox3_Click"/>
+        </Grid>
+        <ListView Grid.Row="2" x:Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True" Height="30">
+                        <TextBlock Text="{Binding Color}" 
+                                   VerticalAlignment="Center"></TextBlock>
+                        <Border Width="550" Height="20" 
+                                Background="{Binding Brush}"
+                                Margin="5 0 5 0"></Border>
+                        <Button HorizontalAlignment="Right" x:Name="btn_delete" Width="150"
+                                Click="Button_Click_1">
+                            Delete</Button>
+                            
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <!--ListView.Resources>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=btn_delete, Path=ToggleButton}" Value="True">
+                            <Setter Property="SelectedItem" Value="Remove"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </-->
+        </ListView>
+    </Grid>
+</Window>
